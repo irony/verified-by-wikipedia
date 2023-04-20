@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "Twitter Wikipedia Icon",
+  "version": "1.0",
+  "description": "Lägger till en blå ikon bredvid användarnamnet i Twitter för alla konton som har en Wikipediasida.",
+  "icons": {
+    "16": "icon16.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://twitter.com/*"],
+      "js": ["contentScript.js"]
+    }
+  ],
+  "web_accessible_resources": ["icon16.png"],
+  "permissions": ["https://www.wikidata.org/"]
+}
