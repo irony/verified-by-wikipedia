@@ -1,4 +1,4 @@
-# Twitter Wikipedia Icon Chrome Extension
+# Twitter Wikipedia Badge Chrome Extension
 
 This Chrome extension adds a small Wikipedia icon next to the username on Twitter profiles that have a corresponding Wikipedia page. By clicking on the icon, users can quickly access the Wikipedia page associated with the Twitter account.
 

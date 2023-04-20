@@ -1,11 +1,21 @@
 {
-  "manifest_version": 2,
-  "name": "Twitter Wikipedia Icon",
+  "manifest_version": 3,
+  "name": "Twitter Wikipedia Badge",
   "version": "1.0",
-  "description": "Lägger till en blå ikon bredvid användarnamnet i Twitter för alla konton som har en Wikipediasida.",
-  "icons": {
-    "16": "icon16.png"
-  },
+  "description": "Adds a blue icon next to the username in Twitter for all accounts with a Wikipedia page.",
+  "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+      }
+    },
+    "icons": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    },
   "content_scripts": [
     {
       "matches": ["https://twitter.com/*"],
