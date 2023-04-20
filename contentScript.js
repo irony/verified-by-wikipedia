@@ -49,9 +49,7 @@ const profileLinkObserver = new IntersectionObserver((entries, observer) => {
           icon.title = "Denna användare har en Wikipedia-sida.";
 
           const wrapper = document.createElement("span");
-          wrapper.style.display = "inline"; // Ändra här
-          wrapper.style.position = "relative";
-          wrapper.style.top = "-2px";
+          wrapper.style.display = "flex"; // Ändra här
 
           profileLink.parentNode.insertBefore(wrapper, profileLink);
           wrapper.appendChild(profileLink);
