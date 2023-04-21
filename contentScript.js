@@ -1,8 +1,29 @@
 const wikipediaPageCache = {};
 
+
+// New function to handle localStorage
+function getFromLocalStorage(key) {
+  const data = localStorage.getItem(key);
+  if (data !== null) {
+    return JSON.parse(data);
+  }
+  return null;
+}
+
+function saveToLocalStorage(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+}
+
 function checkWikipediaPage(twitterHandle) {
   if (wikipediaPageCache.hasOwnProperty(twitterHandle)) {
     return Promise.resolve(wikipediaPageCache[twitterHandle]);
+  }
+
+  // Check if the twitterHandle is in localStorage
+  const localStorageData = getFromLocalStorage(twitterHandle);
+  if (localStorageData !== null) {
+    wikipediaPageCache[twitterHandle] = localStorageData;
+    return Promise.resolve(localStorageData);
   }
 
   const sparqlQuery = `
@@ -18,6 +39,7 @@ function checkWikipediaPage(twitterHandle) {
     .then((data) => {
       const hasWikipediaPage = data.results.bindings.length > 0;
       wikipediaPageCache[twitterHandle] = hasWikipediaPage;
+      saveToLocalStorage(twitterHandle, hasWikipediaPage);
       return hasWikipediaPage;
     })
     .catch((error) => {
