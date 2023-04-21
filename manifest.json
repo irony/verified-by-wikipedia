@@ -22,6 +22,11 @@
       "js": ["contentScript.js"]
     }
   ],
-  "web_accessible_resources": ["icon16.png"],
-  "permissions": ["https://www.wikidata.org/"]
+  "web_accessible_resources": [{
+    "resources": ["icon16.png"],
+    "matches": ["https://twitter.com/*"]
+  }],
+  "host_permissions": [
+    "https://wikidata.org/*"
+  ]
 }
