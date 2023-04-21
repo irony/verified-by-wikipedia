@@ -45,6 +45,7 @@ const profileLinkObserver = new IntersectionObserver((entries, observer) => {
           icon.style.width = "16px";
           icon.style.height = "16px";
           icon.style.marginLeft = "4px";
+          icon.style.marginTop = "2px";
           icon.style.verticalAlign = "text-bottom"; // Lägg till denna rad
           icon.title = "This account has a Wikipedia-page.";
 
