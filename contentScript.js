@@ -1,4 +1,5 @@
 const wikipediaPageCache = {};
+
 function checkWikipediaPage(twitterHandle) {
   const lowerCaseHandle = twitterHandle.toLowerCase();
 
@@ -9,6 +10,8 @@ function checkWikipediaPage(twitterHandle) {
   const sparqlQuery = `
     SELECT ?item ?twitterHandle WHERE {
       ?item wdt:P2002 ?twitterHandle.
+      ?article schema:about ?item.
+      ?article schema:isPartOf [ wikibase:wikiGroup "wikipedia" ].
     }
   `;
   const encodedQuery = encodeURIComponent(sparqlQuery);
