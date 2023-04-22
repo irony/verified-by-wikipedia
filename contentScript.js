@@ -1,13 +1,14 @@
 const wikipediaPageCache = {};
-
 function checkWikipediaPage(twitterHandle) {
-  if (wikipediaPageCache.hasOwnProperty(twitterHandle)) {
-    return Promise.resolve(wikipediaPageCache[twitterHandle]);
+  const lowerCaseHandle = twitterHandle.toLowerCase();
+
+  if (wikipediaPageCache.hasOwnProperty(lowerCaseHandle)) {
+    return Promise.resolve(wikipediaPageCache[lowerCaseHandle]);
   }
 
   const sparqlQuery = `
-    SELECT ?item WHERE {
-      ?item wdt:P2002 "${twitterHandle}".
+    SELECT ?item ?twitterHandle WHERE {
+      ?item wdt:P2002 ?twitterHandle.
     }
   `;
   const encodedQuery = encodeURIComponent(sparqlQuery);
@@ -16,8 +17,12 @@ function checkWikipediaPage(twitterHandle) {
   return fetch(apiUrl)
     .then((response) => response.json())
     .then((data) => {
-      const hasWikipediaPage = data.results.bindings.length > 0;
-      wikipediaPageCache[twitterHandle] = hasWikipediaPage;
+      const bindings = data.results.bindings;
+      const hasWikipediaPage = bindings.some((binding) => {
+        return binding.twitterHandle.value.toLowerCase() === lowerCaseHandle;
+      });
+
+      wikipediaPageCache[lowerCaseHandle] = hasWikipediaPage;
       return hasWikipediaPage;
     })
     .catch((error) => {
@@ -25,6 +30,7 @@ function checkWikipediaPage(twitterHandle) {
       return false;
     });
 }
+
 
 const observerOptions = {
   root: null,
