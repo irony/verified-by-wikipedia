@@ -53,7 +53,7 @@ const profileLinkObserver = new IntersectionObserver((entries, observer) => {
           icon.src = chrome.runtime.getURL("icon16.png");
           icon.style.width = "16px";
           icon.style.height = "16px";
-          icon.style.marginLeft = "4px";
+          icon.style.margin = "2px 4px";
           icon.style.verticalAlign = "text-bottom"; // Lägg till denna rad
           icon.title = "This account has a Wikipedia-page.";
 
