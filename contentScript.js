@@ -7,25 +7,14 @@ function checkWikipediaPage(twitterHandle) {
     return Promise.resolve(wikipediaPageCache[lowerCaseHandle]);
   }
 
-  const sparqlQuery = `
-    SELECT ?item ?twitterHandle WHERE {
-      ?item wdt:P2002 ?twitterHandle.
-      ?article schema:about ?item.
-      ?article schema:isPartOf [ wikibase:wikiGroup "wikipedia" ].
-    }
-  `;
-  const encodedQuery = encodeURIComponent(sparqlQuery);
-  const apiUrl = `https://query.wikidata.org/sparql?query=${encodedQuery}&format=json`;
+ 
+  const apiUrl = `https://hub.toolforge.org/P2002:${twitterHandle}?format=json&lang=en,sv,auto`;
 
   return fetch(apiUrl)
     .then((response) => response.json())
     .then((data) => {
-      const bindings = data.results.bindings;
-      const hasWikipediaPage = bindings.some((binding) => {
-        return binding.twitterHandle.value.toLowerCase() === lowerCaseHandle;
-      });
-
-      wikipediaPageCache[lowerCaseHandle] = hasWikipediaPage;
+      const destination = data.destination;
+      const hasWikipediaPage = destination?.url;
       return hasWikipediaPage;
     })
     .catch((error) => {
