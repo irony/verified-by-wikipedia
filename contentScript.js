@@ -54,7 +54,7 @@ const profileLinkObserver = new IntersectionObserver((entries, observer) => {
           icon.style.width = "16px";
           icon.style.height = "16px";
           icon.style.margin = "2px 4px";
-          icon.style.verticalAlign = "text-bottom"; // Lägg till denna rad
+          icon.style.verticalAlign = "text-bottom";
           icon.title = "This account has a Wikipedia-page.";
 
           const wrapper = document.createElement("span");
@@ -79,9 +79,9 @@ function observeProfileLink(profileLink) {
 }
 
 function addWikipediaIconToProfile() {
-  const profileLinks = document.querySelectorAll(
+  const profileLinks = Array.from(document.querySelectorAll(
     '[data-testid="primaryColumn"] div[dir="auto"] a[href^="/"]:not([data-wikipedia-icon-added]), [data-testid="primaryColumn"] a[href^="/"][role="link"]:not([data-wikipedia-icon-added])'
-  );
+  )).filter(el => el.textContent.includes("@"));
 
   profileLinks.forEach((profileLink) => {
     const hasSpecificParent = profileLink.closest("div[role='group'], div[role='button'], div.r-1udh08x");
