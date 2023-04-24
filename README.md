@@ -51,7 +51,3 @@ This project is licensed under the [MIT License](LICENSE).
 
 - [OpenAI](https://openai.com/) for providing assistance through their ChatGPT API.
 - [Wikidata API](https://www.wikidata.org/wiki/Wikidata:Data_access) for providing data on Wikipedia pages associated with Twitter accounts.
-
-Don't forget to include a `LICENSE` file in your project directory as well. Here's an example of the MIT License text you can use:
-
-```
