@@ -1,15 +1,14 @@
-const wikipediaPageCache = {}
+const wikipediaPageCache = new Map()
 
 function checkWikipediaPage(twitterHandle) {
-  const lowerCaseHandle = twitterHandle.toLowerCase()
+  const cached = wikipediaPageCache.get(twitterHandle)
+  if (cached) return Promise.resolve(cached)
 
-  if (wikipediaPageCache.hasOwnProperty(lowerCaseHandle)) {
-    return Promise.resolve(wikipediaPageCache[lowerCaseHandle])
-  }
+  const safeTwitterHandle = encodeURIComponent(twitterHandle)
 
-  const apiUrl = `https://hub.toolforge.org/P2002:${twitterHandle}?format=json&lang=en,sv,auto`
+  const apiUrl = `https://hub.toolforge.org/P2002:${safeTwitterHandle}?format=json&lang=en,sv,auto`
 
-  return fetch(apiUrl)
+  const promise = fetch(apiUrl)
     .then((response) =>
       response.ok ? response.json() : Promise.resolve(false)
     )
@@ -23,6 +22,8 @@ function checkWikipediaPage(twitterHandle) {
       console.error("Error fetching Wikidata:", error)
       return false
     })
+  wikipediaPageCache.set(twitterHandle, promise)
+  return promise
 }
 
 const observerOptions = {
@@ -36,9 +37,9 @@ const profileLinkObserver = new IntersectionObserver((entries, observer) => {
     if (entry.isIntersecting) {
       const profileLink = entry.target
       const twitterHandle = profileLink.getAttribute("href").replace("/", "")
-
+      if (twitterHandle.includes("/") || twitterHandle.includes("?")) return
       checkWikipediaPage(twitterHandle).then(({ url, title }) => {
-        if (url) {
+        if (profileLink.textContent === title && url) {
           const icon = document.createElement("img")
           icon.src = chrome.runtime.getURL("icon16.png")
           icon.style.width = "16px"
@@ -72,17 +73,11 @@ function addWikipediaIconToProfile() {
     document.querySelectorAll(
       '[data-testid="primaryColumn"] div[dir="auto"] a[href^="/"]:not([data-wikipedia-icon-added]), [data-testid="primaryColumn"] a[href^="/"][role="link"]:not([data-wikipedia-icon-added])'
     )
-  ).filter((el) => el.textContent.includes("@"))
+  ).filter((el) => !el.textContent.includes("@"))
 
   profileLinks.forEach((profileLink) => {
-    const hasSpecificParent = profileLink.closest(
-      "div[role='group'], div[role='button'], div.r-1udh08x"
-    )
-
-    if (!hasSpecificParent) {
-      profileLink.setAttribute("data-wikipedia-icon-added", "true")
-      observeProfileLink(profileLink)
-    }
+    profileLink.setAttribute("data-wikipedia-icon-added", "true")
+    observeProfileLink(profileLink)
   })
 }
 
