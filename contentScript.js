@@ -37,9 +37,15 @@ const profileLinkObserver = new IntersectionObserver((entries, observer) => {
     if (entry.isIntersecting) {
       const profileLink = entry.target
       const twitterHandle = profileLink.getAttribute("href").replace("/", "")
-      if (twitterHandle.includes("/") || twitterHandle.includes("?")) return
+      if (
+        !profileLink.textContent ||
+        twitterHandle.includes("/") ||
+        twitterHandle.includes("?")
+      ) {
+        return
+      }
       checkWikipediaPage(twitterHandle).then(({ url, title }) => {
-        if (profileLink.textContent === title && url) {
+        if (title.startsWith(profileLink.textContent) && url) {
           const icon = document.createElement("img")
           icon.src = chrome.runtime.getURL("icon16.png")
           icon.style.width = "16px"
@@ -48,12 +54,16 @@ const profileLinkObserver = new IntersectionObserver((entries, observer) => {
           icon.style.verticalAlign = "text-bottom"
           icon.title = `This account has a Wikipedia-page called ${title}.`
 
+          const link = document.createElement("a")
+          link.href = url
+          link.appendChild(icon)
+
           const wrapper = document.createElement("span")
           wrapper.style.display = "flex"
 
           profileLink.parentNode.insertBefore(wrapper, profileLink)
           wrapper.appendChild(profileLink)
-          wrapper.insertAdjacentElement("beforeend", icon)
+          wrapper.insertAdjacentElement("beforeend", link)
 
           profileLink.setAttribute("data-wikipedia-icon-added", "true")
         }
