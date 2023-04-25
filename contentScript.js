@@ -47,7 +47,7 @@ const profileLinkObserver = new IntersectionObserver((entries, observer) => {
       checkWikipediaPage(twitterHandle).then(({ url, title }) => {
         if (title.startsWith(profileLink.textContent) && url) {
           const icon = document.createElement("img")
-          icon.src = chrome.runtime.getURL("icon16.png")
+          icon.src = chrome.runtime.getURL("icon.svg")
           icon.style.width = "16px"
           icon.style.height = "16px"
           icon.style.margin = "2px 4px"

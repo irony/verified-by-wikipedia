@@ -6,13 +6,13 @@
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "icon16.png",
+      "16": "icon.svg",
       "48": "icon48.png",
       "128": "icon128.png"
     }
   },
   "icons": {
-    "16": "icon16.png",
+    "16": "icon.svg",
     "48": "icon48.png",
     "128": "icon128.png"
   },
@@ -27,7 +27,7 @@
     "*://*.wikidata.org/*",
     "*://hub.toolforge.org/*"
   ],
-  "web_accessible_resources": ["icon16.png"],
+  "web_accessible_resources": ["icon.svg"],
   "applications": {
     "gecko": {
       "id": "christian+twitter-badge@landgren.nu",
