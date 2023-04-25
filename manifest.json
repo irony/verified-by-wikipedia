@@ -1,32 +1,37 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "Twitter Wikipedia Badge",
   "version": "1.0",
-  "description": "Adds a blue icon next to the username in Twitter for all accounts with a Wikipedia page.",
-  "action": {
-      "default_popup": "popup.html",
-      "default_icon": {
-        "16": "icon16.png",
-        "48": "icon48.png",
-        "128": "icon128.png"
-      }
-    },
-    "icons": {
+  "description": "Adds a white icon next to the username in Twitter for all accounts with a Wikipedia page.",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
       "16": "icon16.png",
       "48": "icon48.png",
       "128": "icon128.png"
-    },
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
   "content_scripts": [
     {
-      "matches": ["https://twitter.com/*"],
+      "matches": ["*://*.twitter.com/*"],
       "js": ["contentScript.js"]
     }
   ],
-  "web_accessible_resources": [{
-    "resources": ["icon16.png"],
-    "matches": ["https://twitter.com/*"]
-  }],
-  "host_permissions": [
-    "https://wikidata.org/*"
-  ]
+  "permissions": [
+    "activeTab",
+    "*://*.wikidata.org/*",
+    "*://hub.toolforge.org/*"
+  ],
+  "web_accessible_resources": ["icon16.png"],
+  "applications": {
+    "gecko": {
+      "id": "christian+twitter-badge@landgren.nu",
+      "strict_min_version": "53.0"
+    }
+  }
 }
