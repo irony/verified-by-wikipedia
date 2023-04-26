@@ -45,12 +45,15 @@ const profileLinkObserver = new IntersectionObserver((entries, observer) => {
         return
       }
       checkWikipediaPage(twitterHandle).then(({ url, title }) => {
-        if (title.startsWith(profileLink.textContent) && url) {
+        if (url) {
           const icon = document.createElement("img")
           icon.src = chrome.runtime.getURL("icon.svg")
           icon.style.width = "16px"
           icon.style.height = "16px"
           icon.style.margin = "2px 4px"
+          if (!title.startsWith(profileLink.textContent)) {
+            icon.style.opacity = "0.5"
+          }
           icon.style.verticalAlign = "text-bottom"
           icon.title = `This account has a Wikipedia-page called ${title}.`
 
