@@ -3,7 +3,7 @@
   "name": "Twitter Wikipedia Badge",
   "version": "1.3",
   "description": "Adds a white icon next to the username in Twitter for all accounts with a Wikipedia page.",
-  "browser_action": {
+  "action": {
     "default_popup": "popup.html",
     "default_icon": {
       "16": "icon.svg",
