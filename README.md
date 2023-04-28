@@ -26,7 +26,7 @@ https://shareg.pt/QsiIiV0
 
 ### From Chrome Web Store (now published!)
 
-1. Visit the extension's page on the Chrome Web Store: [Chrome plugin](https://chrome.google.com/webstore/detail/twitter-wikipedia-badge/dlkpigaliodpkkhcfhhohnldpbooglnn)
+1. Visit the extension's page on the Chrome Web Store: [Twitter Wikipedia Badge](https://chrome.google.com/webstore/detail/twitter-wikipedia-badge/dlkpigaliodpkkhcfhhohnldpbooglnn).
 2. Click the "Add to Chrome" button.
 3. Confirm the installation by clicking "Add extension" in the popup window.
 
