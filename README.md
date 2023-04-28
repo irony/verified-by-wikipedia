@@ -2,7 +2,7 @@
 
 This Chrome extension adds a small Wikipedia icon next to the username on Twitter profiles that have a corresponding Wikipedia page. By clicking on the icon, users can quickly access the Wikipedia page associated with the Twitter account.
 
-<img width="302" alt="image" src="https://user-images.githubusercontent.com/395843/233506582-ef5b6157-2fa0-4b6c-a52d-01e0bc4c9c0c.png">
+![image](https://user-images.githubusercontent.com/395843/235072802-5e36f505-fa8f-4432-a841-a9c5a7c17f5e.png)
 
 Note: this plugin was created by GPT-4 in just two hours. Here is the transcript (in Swedish):
 https://shareg.pt/QsiIiV0
@@ -26,7 +26,7 @@ https://shareg.pt/QsiIiV0
 
 ### From Chrome Web Store (now published!)
 
-1. Visit the extension's page on the Chrome Web Store (add the URL here).
+1. Visit the extension's page on the Chrome Web Store: [Chrome plugin](https://chrome.google.com/webstore/detail/twitter-wikipedia-badge/dlkpigaliodpkkhcfhhohnldpbooglnn)
 2. Click the "Add to Chrome" button.
 3. Confirm the installation by clicking "Add extension" in the popup window.
 
